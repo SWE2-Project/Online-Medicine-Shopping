@@ -1,0 +1,125 @@
+﻿@model Online_Medicine_Shopping.Models.users
+
+@{
+    ViewBag.Title = "My Profile";
+}
+<head>
+    <style>
+        .Description {
+            line-height: 2.5;
+        }
+
+
+        #div1 {
+            float: left; /* Commenting this out results in another weird result*/
+            width: 20%;
+            padding: 10px;
+            background: #f8f3f3;
+            box-sizing: border-box;
+        }
+
+        #div2 {
+            width: 80%;
+            padding: 10px;
+            float: left;
+            background: #f3ecec;
+            box-sizing: border-box;
+            height: 270px;
+        }
+    </style>
+    <script>
+        //password show and hide
+        function Toggle() {
+            var temp = document.getElementById("typepass");
+            if (temp.type === "password") {
+                temp.type = "text";
+            } else { temp.type = "password" }
+        }
+    </script>
+</head>
+
+<div>
+
+    <dl class="dl-horizontal">
+
+        <div id="div1">
+            @if (Model.type_id == 1)
+            {
+                <img src="~/Content/images/admin.png" width="200px" height="250px" />
+            }
+            else
+            {
+                <img src="~/Content/images/customer.png" width="200px" height="250px" />
+            }
+        </div>
+
+        <div id="div2">
+            <dt class="Description">
+                About:
+            </dt>
+            <dd class="Description">
+                @Html.ViewBag.type
+            </dd>
+
+            <dt class="Description">
+                @Html.DisplayNameFor(model => model.username)
+            </dt>
+
+            <dd class="Description">
+                @Html.DisplayFor(model => model.username)
+            </dd>
+
+            <dt class="Description">
+                <span class="fa fa-fw fa-eye field-icon toggle-password" onclick="Toggle()" alt="Show Password"></span>
+                @Html.DisplayNameFor(model => model.password)
+
+            </dt>
+
+
+            <dd class="Description">
+
+                <input style="border:none;background-color:#f3ecec;width:200px;margin-left:-20px" id="typepass" type="password" value=@Html.DisplayFor(model=>model.password) readonly>
+
+            </dd>
+            <dt class="Description">
+                @Html.DisplayNameFor(model => model.fullname)
+            </dt>
+
+            <dd class="Description">
+                @Html.DisplayFor(model => model.fullname)
+            </dd>
+
+            <!--end of right side-->
+
+            <dt class="Description">
+                @Html.DisplayNameFor(model => model.phone)
+            </dt>
+
+            <dd class="Description">
+                @Html.DisplayFor(model => model.phone)
+            </dd>
+
+            <dt class="Description">
+                @Html.DisplayNameFor(model => model.address)
+                </dtclass="Description">
+
+        <dd class="Description">
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt class="Description">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd class="Description">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+</div>
+@Html.ActionLink("Edit Profile", "Edit")
+@Html.ActionLink("Delete Profile", "Delete")
+
+    </dl>
+</div>
+</div>
+

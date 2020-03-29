@@ -1,0 +1,56 @@
+﻿@model Online_Medicine_Shopping.Models.users
+
+<div id="account-login">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+            <li><a href="">Account</a></li>
+            <li><a href="">Login</a></li>
+        </ul>
+        <div class="row">
+            <div id="content" class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <h2>New Customer</h2>
+                            <p><strong>Register</strong></p>
+                            <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+
+
+                            @Html.ActionLink("Continue", "Register", "users", new { @class = "btn btn-primary" })
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        @using (Html.BeginForm())
+                        {
+                            //generate a hidden form field that is validated when the form is submitted
+                            @Html.AntiForgeryToken()
+                            <div class="well">
+                                <h2>Returning Customer</h2>
+                                <p><strong>I am a returning customer</strong></p>
+                                <form class="form" asp-controller="users" asp-action="Login" action="Login">
+                                    <div class="form-group">
+                                        <label class="control-label" for="username" name="username">User Name</label>
+                                        <input name="xusername" value="" placeholder="User Name" id="input-username" class="form-control" type="text">
+                                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                                        <span asp-validation-for="username" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="input-password">Password</label>
+                                        <input name="xpassword" value="" placeholder="Password" id="input-password" class="form-control" type="password">
+                                        <span asp-validation-for="password" class="text-danger"></span>
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <input value="Login" class="btn btn-primary" type="submit"><br>
+                                    <div style="color:red;font-weight: bold;">@Html.ValidationSummary()</div>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,156 @@
+/*
+Template Name: demo7
+File Name: responsive.css
+Author Name: ThemeVault
+Author URI: http://www.themevault.net/
+License URI: http://www.themevault.net/license/
+*/
+
+/* Landscape phones and smaller */
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {}
+
+@media only screen and (max-width: 1199px) {
+
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .tv-small-banner .tv-banner-box {
+        min-height: 399px;
+    }
+    .tv-banner-box .tv-small-desc h1 {
+        font-size: 60px;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .navbar {
+        margin-bottom: 0;
+    }
+    .tv-footer-top {
+        padding: 70px 0 30px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .tv-banner-box img {
+        padding-top: 65px;
+    }
+    .tv-small-banner .tv-banner-box {
+        min-height: 305px;
+    }
+    .tv-banner-box .tv-small-desc h1 {
+        font-size: 45px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #logo img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .tv-l-padd-zero {
+        padding-left: 15px;
+    }
+    .tv-offspace-30.tv-lr-padd-zero {
+        margin-top: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .navbar-toggle {
+        border-radius: 0;
+        font-size: 20px;
+        margin-bottom: 8px;
+        margin-right: 0;
+        margin-top: -33px;
+        padding: 0;
+    }
+    .navbar-nav > li > a {
+        font-size: 13px;
+        padding: 6px 5px;
+    }
+    .ship1, .ship3 {
+        margin-bottom: 0;
+    }
+    .tv-module-title, .module-tab-product-category .tv-module-title, .tv-newletter, .tv-offspace-110 {
+        margin-top: 65px;
+    }
+    .tv-newletter {
+        padding-top: 65px;
+    }
+    footer {
+        margin-top: 80px;
+    }
+    .tv-footer-top {
+        padding: 50px 0 0;
+    }
+    #subscribe_email {
+        padding-right: 120px;
+        width: 400px;
+    }
+    #tv-subscribe .btn {
+        padding: 0 20px;
+    }
+    #checkout-cart h1 {
+        font-size: 20px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    .tv-pannel-default img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .product-thumb .item-inner {
+        text-align: center;
+    }
+    .product-thumb .images-container {
+        display: inline-block;
+        text-align: center;
+    }
+    .product-list .product-thumb .images-container, .product-list .product-thumb .caption {
+        float: none;
+        width: auto;
+    }
+    .product-list .product-thumb .caption {
+        padding: 0;
+        text-align: center;
+    }
+    .tv-pro-info .nav-tabs > li {
+        margin: 0 5px -4px 0;
+    }
+    .quantity-box {
+        margin-bottom: 15px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .col-footer-bottomspace + .col-footer-bottomspace {
+        float: left;
+        width: 33.33%;
+    }
+    .tv-footer-top {
+        padding-bottom: 20px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+    .product-grid {
+        width: 50%;
+    }
+    .product-grid:nth-of-type(2n+1) {
+        clear: left;
+    }
+
+}
+@media only screen and (max-width: 479px) {
+    #subscribe_email {
+        width: 290px;
+    }
+}
+@media only screen and (max-width: 600px) {
+
+}
+@media only screen and (max-width: 500px) {
+    .tv-newletter-title h4 {
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 400px) {
+
+}
