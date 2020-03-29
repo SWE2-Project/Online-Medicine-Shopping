@@ -99,6 +99,9 @@ namespace Online_Medicine_Shopping.Controllers
             Session["user_email"] = email;
             Session["type"] = type;
         }
+        //*********************************************************************
+        //----------User Profile Functionalities----------------------------
+        //*********************************************************************
         public ActionResult Profile(int? id)
         {
             if (Session["user_id"].Equals(id))
