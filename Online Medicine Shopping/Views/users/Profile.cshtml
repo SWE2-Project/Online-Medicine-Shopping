@@ -116,7 +116,7 @@
         </dd>
 
 </div>
-@Html.ActionLink("Edit Profile", "Edit")
+@Html.ActionLink("Edit Profile", "Edit", new { id = @Html.DisplayFor(model => model.id)},null)
 @Html.ActionLink("Delete Profile", "Delete")
 
     </dl>

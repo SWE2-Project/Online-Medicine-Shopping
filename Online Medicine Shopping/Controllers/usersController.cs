@@ -15,7 +15,10 @@ namespace Online_Medicine_Shopping.Controllers
     public class usersController : Controller
     {
         private TemporaryDBContext db = new TemporaryDBContext();
-        // GET: users/Register
+        //*********************************************************************
+        //----------Register Functionalities----------------------------
+        //This Module is assigned to Amr Salah
+        //*********************************************************************
         public ActionResult Register()
         {
             ViewBag.type_id = 2;
@@ -23,8 +26,7 @@ namespace Online_Medicine_Shopping.Controllers
         }
 
         // POST: users/Register
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "id,username,password,phone,address,type_id=2,fullname,email")] users users)
@@ -44,9 +46,12 @@ namespace Online_Medicine_Shopping.Controllers
 
         //*********************************************************************
         //----------Login Functionalities----------------------------
+        //This Module is assigned to Basant Atef
         //*********************************************************************
 
         //[HttpGet]
+
+   
         public ActionResult Login()
         {
 
@@ -75,10 +80,10 @@ namespace Online_Medicine_Shopping.Controllers
             
         }
 
-        /// <summary>
-        /// Logout Functionalities
-        /// </summary>
-        /// <returns></returns>
+        //*********************************************************************
+        //----------Logout Functionalities----------------------------
+        //This Module is assigned to Ahmed Reshad
+        //*********************************************************************
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -101,8 +106,9 @@ namespace Online_Medicine_Shopping.Controllers
         }
         //*********************************************************************
         //----------User Profile Functionalities----------------------------
+        //This Module is assigned to Mohamed Hussein
         //*********************************************************************
-        public ActionResult Profile(int? id)
+        public new ActionResult Profile(int? id)
         {
             if (Session["user_id"].Equals(id))
             {
@@ -117,6 +123,48 @@ namespace Online_Medicine_Shopping.Controllers
             }
 
 
+        }
+        //*********************************************************************
+        //----------Edit Profile Functionalities----------------------------
+        //This Module is assigned to Ahmed Abdel Fatah
+        //*********************************************************************
+
+        public ActionResult EditProfile(int? id)
+        {
+            if (Session["user_id"].Equals(id))
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                users users = db.users.Find(id);
+                if (users == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
+                return View(users);
+            }
+
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "id,username,password,phone,address,type_id,fullname,email")] users user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Profile", new { id = user.id });
+            }
+            ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", user.type_id);
+            return View(user);
         }
 
 
