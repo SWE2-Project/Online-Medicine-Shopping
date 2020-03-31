@@ -124,26 +124,16 @@ namespace Online_Medicine_Shopping.Controllers
         //----------Edit Profile Functionalities----------------------------
         //This Module is assigned to Ahmed Abdel Fatah
         //*********************************************************************
-
         public ActionResult EditProfile(int? id)
         {
-            if ((int)Session["user_id"] != id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
+         
                 users users = db.users.Find(id);
                 if (users == null)
                 {
                     return HttpNotFound();
                 }
                 ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
-                return RedirectToAction("Profile", new { id = id });
-            }
-            else {
-                return HttpNotFound();
-            }
+                return View(users);
 
         }
 
@@ -154,37 +144,27 @@ namespace Online_Medicine_Shopping.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.type_id = (int)Session["type"];
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Profile", new { id = user.id });
+              
             }
             ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", user.type_id);
-            return View(user);
+            return RedirectToAction("Profile", new { id = user.id });
         }
         //*********************************************************************
         //----------Edit Profile Functionalities----------------------------
         //This Module is assigned to Ahmed Shokry
         //*********************************************************************
-        public ActionResult DeleteProfile(int? id)
+              public ActionResult DeleteProfile(int? id)
         {
-            if ((int)Session["user_id"] !=id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
                 users user = db.users.Find(id);
                 if (user == null)
                 {
                     return HttpNotFound();
                 }
                 return View(user);
-            }
 
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
         }
 
         // POST: users/Delete/5
@@ -197,7 +177,6 @@ namespace Online_Medicine_Shopping.Controllers
             db.SaveChanges();
             return RedirectToAction("Register");
         }
-
 
 
 
