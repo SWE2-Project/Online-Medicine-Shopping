@@ -127,7 +127,8 @@ namespace Online_Medicine_Shopping.Controllers
 
         public ActionResult EditProfile(int? id)
         {
-           
+            if ((int)Session["user_id"] != id)
+            {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,8 +139,12 @@ namespace Online_Medicine_Shopping.Controllers
                     return HttpNotFound();
                 }
                 ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
-                return View(users);
-          
+                return RedirectToAction("Profile", new { id = id });
+            }
+            else {
+                return HttpNotFound();
+            }
+
         }
 
 
@@ -155,6 +160,42 @@ namespace Online_Medicine_Shopping.Controllers
             }
             ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", user.type_id);
             return View(user);
+        }
+        //*********************************************************************
+        //----------Edit Profile Functionalities----------------------------
+        //This Module is assigned to Ahmed Shokry
+        //*********************************************************************
+        public ActionResult DeleteProfile(int? id)
+        {
+            if ((int)Session["user_id"] !=id)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                users user = db.users.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
+            }
+
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        // POST: users/Delete/5
+        [HttpPost, ActionName("DeleteProfile")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteProfile(int id)
+        {
+            users user = db.users.Find(id);
+            db.users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Register");
         }
 
 
