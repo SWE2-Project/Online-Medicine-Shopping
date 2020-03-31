@@ -110,17 +110,13 @@ namespace Online_Medicine_Shopping.Controllers
         //*********************************************************************
         public new ActionResult Profile(int id)
         {
-            if (Session["user_id"].Equals(id))
-            {
+            
                 var user = db.users.Where(e => e.id == id).Include(e => e.user_type).SingleOrDefault();
                 ViewBag.type = user.user_type.type_name;
                 return View(user);
-            }
+            
 
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+           
 
 
         }
@@ -129,10 +125,9 @@ namespace Online_Medicine_Shopping.Controllers
         //This Module is assigned to Ahmed Abdel Fatah
         //*********************************************************************
 
-        public ActionResult EditProfile(int id)
+        public ActionResult EditProfile(int? id)
         {
-            if (Session["user_id"].Equals(id))
-            {
+           
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -144,12 +139,7 @@ namespace Online_Medicine_Shopping.Controllers
                 }
                 ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
                 return View(users);
-            }
-
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+          
         }
 
 
