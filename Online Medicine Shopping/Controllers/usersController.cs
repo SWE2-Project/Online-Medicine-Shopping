@@ -108,7 +108,7 @@ namespace Online_Medicine_Shopping.Controllers
         //----------User Profile Functionalities----------------------------
         //This Module is assigned to Mohamed Hussein
         //*********************************************************************
-        public new ActionResult Profile(int? id)
+        public new ActionResult Profile(int id)
         {
             if (Session["user_id"].Equals(id))
             {
@@ -129,7 +129,7 @@ namespace Online_Medicine_Shopping.Controllers
         //This Module is assigned to Ahmed Abdel Fatah
         //*********************************************************************
 
-        public ActionResult EditProfile(int? id)
+        public ActionResult EditProfile(int id)
         {
             if (Session["user_id"].Equals(id))
             {
