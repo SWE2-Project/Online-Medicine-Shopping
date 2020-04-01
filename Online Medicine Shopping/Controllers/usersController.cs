@@ -160,7 +160,7 @@ namespace Online_Medicine_Shopping.Controllers
                 {
                     return HttpNotFound();
                 }
-                ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
+                
                 return View(users);
             }
 
