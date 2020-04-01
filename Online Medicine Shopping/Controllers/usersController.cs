@@ -15,7 +15,7 @@ namespace Online_Medicine_Shopping.Controllers
 {
     public class usersController : Controller
     {
-        private TemporaryDBContext db = new TemporaryDBContext();
+             private TemporaryDBContext db = new TemporaryDBContext();
         //*********************************************************************
         //----------Register Functionalities----------------------------
         //This Module is assigned to Amr Salah
@@ -47,16 +47,22 @@ namespace Online_Medicine_Shopping.Controllers
                         users.type_id = 2;
                         db.users.Add(users);
                         db.SaveChanges();
+                        Session["status"] = true;
+                        Session["type_id"] = users.id;
                         Session["user_id"] = users.id;
                         return RedirectToAction("Profile", new { id = users.id });
+
+
                     }
 
                 }
+               // return RedirectToAction("Login", new { xusername = users.username, xpassword = users.password });
             }
 
             ViewBag.type_id = 2;
             Session["status"] = true;
             return View(users);
+            
         }
 
         //*********************************************************************
@@ -241,6 +247,7 @@ namespace Online_Medicine_Shopping.Controllers
             db.SaveChanges();
             Session.Abandon();
             return RedirectToAction("Register");
+
         }
 
         // GET: users
@@ -253,6 +260,9 @@ namespace Online_Medicine_Shopping.Controllers
             }
             else { return HttpNotFound(); }
         }
+
+        }  
+
 
 
     }

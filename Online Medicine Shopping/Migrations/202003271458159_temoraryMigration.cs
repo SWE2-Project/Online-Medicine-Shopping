@@ -29,7 +29,13 @@ namespace Online_Medicine_Shopping.Migrations
                         fullname = c.String(nullable: false, maxLength: 20),
                         email = c.String(nullable: false),
                     image = c.String(nullable: false)
+                  image = c.String(nullable: false)
+                    })
+                       image = c.String(nullable: false)
                 })
+
+
+
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.user_type", t => t.type_id, cascadeDelete: true)
                 .Index(t => t.type_id);

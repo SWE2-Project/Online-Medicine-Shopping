@@ -71,7 +71,7 @@
 
             <dd class="Description">
 
-                <input style="border:none;background-color:#f3ecec;width:200px;margin-left:-20px" id="typepass" type="password" value=@Html.DisplayFor(model=>model.password) readonly>
+                <input style="border:none;background-color:#f3ecec;width:200px;margin-left:-20px" id="typepass" type="password" value=@Html.DisplayFor(model => model.password) readonly>
 
             </dd>
             <dt class="Description">
@@ -112,7 +112,8 @@
          </dl>
         <button class="btn btn-primary">@Html.ActionLink("Edit Profile", "EditProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
         <button class="btn btn-primary">@Html.ActionLink("Delete Profile", "DeleteProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
-        @if ((int)Session["type_id"] ==1) {<button class="btn btn-primary">@Html.ActionLink("Show All Users", "list_of_users", new { id = @Html.DisplayFor(model => model.id) })</button> }
+       
+        @if(Model.type_id==1) {<button class="btn btn-primary">@Html.ActionLink("Show All Users", "list_of_users")</button> }
     
 </div>
 </div>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Online_Medicine_Shopping.DBContext;
 
 namespace Online_Medicine_Shopping
 {
@@ -21,8 +22,8 @@ namespace Online_Medicine_Shopping
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Configuration configuration = new Configuration();
             DbMigrator migrator = new DbMigrator(configuration);
-            
             Database.SetInitializer<DbContext>(null);
+            Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(null);
         }
     }
 }
