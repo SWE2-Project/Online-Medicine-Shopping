@@ -236,6 +236,7 @@ namespace Online_Medicine_Shopping.Controllers
             users user = db.users.Find(id);
             db.users.Remove(user);
             db.SaveChanges();
+            Session.Abandon();
             return RedirectToAction("Register");
         }
 

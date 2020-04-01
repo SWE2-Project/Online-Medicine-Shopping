@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Online_Medicine_Shopping.Migrations;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +19,10 @@ namespace Online_Medicine_Shopping
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Configuration configuration = new Configuration();
+            DbMigrator migrator = new DbMigrator(configuration);
+            
+            Database.SetInitializer<DbContext>(null);
         }
     }
 }

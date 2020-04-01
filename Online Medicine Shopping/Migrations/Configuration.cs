@@ -18,14 +18,18 @@ namespace Online_Medicine_Shopping.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.user_type.AddOrUpdate(
+              p => p.type_id,
+              new Models.user_type { type_id = 1, type_name = "admin" },
+              new Models.user_type { type_id = 2, type_name = "customer" }
+            );
+            context.users.AddOrUpdate(
+                e => e.id,
+                new Models.users {  username = "DonnaHall123", password = "Donna123456789", phone = "012222222", address = "test", type_id = 1, fullname = "Donna Hall", email = "Donna@gmail.com" ,image="admin.png"},
+                new Models.users {  username = "JhonSmith222", password = "jhon123456789", phone = "012222222", address = "test", type_id = 1, fullname = "Jhon Smith Adam", email = "jhon@gmail.com", image = "f2.jpg" },
+                new Models.users {  username = "PeterAdam555", password = "peter123456789", phone = "012222222", address = "test", type_id = 2, fullname = "Peter Adam", email = "peter@gmail.com", image = "customer.png" }
+
+                );
         }
     }
 }
