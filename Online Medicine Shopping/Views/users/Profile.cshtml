@@ -109,10 +109,11 @@
             </dd>
 
         </div>
+         </dl>
         <button class="btn btn-primary">@Html.ActionLink("Edit Profile", "EditProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
         <button class="btn btn-primary">@Html.ActionLink("Delete Profile", "DeleteProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
-
-    </dl>
+        @if ((int)Session["type_id"] ==1) {<button class="btn btn-primary">@Html.ActionLink("Show All Users", "list_of_users", new { id = @Html.DisplayFor(model => model.id) })</button> }
+    
 </div>
 </div>
 

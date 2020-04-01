@@ -120,7 +120,7 @@ namespace Online_Medicine_Shopping.Controllers
             Session["user_name"] = username;
             Session["user_id"] = id;
             Session["user_email"] = email;
-            Session["type"] = type;
+            Session["type_id"] = type;
         }
         //*********************************************************************
         //----------User Profile Functionalities----------------------------
@@ -187,12 +187,15 @@ namespace Online_Medicine_Shopping.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/images/users"), fileName);
                         file.SaveAs(path);
-                        db.users.FirstOrDefault(e=>e.id==(int)Session["user_id"]).image
-                            .Replace(db.users.FirstOrDefault(e => e.id == (int)Session["user_id"]).image, fileName);
-                        users.type_id = 2;
+                        var account = db.users.SingleOrDefault(e=>e.id==users.id);
+                        account.image = fileName;
+                        account.username = users.username;
+                        account.password = users.password;
+                        account.phone = users.phone;
+                        account.address = users.address;
                         
-                        db.Entry(users).State = EntityState.Modified;
-                        users.image = fileName;
+                        account.fullname = users.fullname;
+                        account.email = users.email;
                         db.SaveChanges();
                         return RedirectToAction("Profile", new { id = users.id });
                     }
@@ -240,7 +243,16 @@ namespace Online_Medicine_Shopping.Controllers
             return RedirectToAction("Register");
         }
 
-
+        // GET: users
+        public ActionResult list_of_users()
+        {
+            if ((int)Session["type_id"] == 1)
+            {
+                var users = db.users.Include(u => u.user_type);
+                return View(users.ToList());
+            }
+            else { return HttpNotFound(); }
+        }
 
 
     }

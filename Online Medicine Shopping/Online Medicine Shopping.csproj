@@ -245,6 +245,7 @@
     <Content Include="Views\users\Profile.cshtml" />
     <Content Include="Views\users\EditProfile.cshtml" />
     <Content Include="Views\users\DeleteProfile.cshtml" />
+    <Content Include="Views\users\list_of_users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
