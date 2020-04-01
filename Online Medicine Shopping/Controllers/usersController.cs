@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Web.Mvc;
 using Online_Medicine_Shopping.DBContext;
 using Online_Medicine_Shopping.Models;
+using System.IO;
 
 namespace Online_Medicine_Shopping.Controllers
 {
@@ -29,18 +30,32 @@ namespace Online_Medicine_Shopping.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "id,username,password,phone,address,type_id=2,fullname,email")] users users)
+        public ActionResult Register([Bind(Include = "id,username,password,phone,image,address,type_id=2,fullname,email")] users users)
         {
             if (ModelState.IsValid)
             {
-                users.type_id = 2;
-                db.users.Add(users);
-                db.SaveChanges();
-                Session["status"] = true;
-                return RedirectToAction("Index", "Home");
+                //for file Posted
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images/users"), fileName);
+                        file.SaveAs(path);
+                        users.image = fileName;
+                        users.type_id = 2;
+                        db.users.Add(users);
+                        db.SaveChanges();
+                        Session["user_id"] = users.id;
+                        return RedirectToAction("Profile", new { id = users.id });
+                    }
+
+                }
             }
 
             ViewBag.type_id = 2;
+            Session["status"] = true;
             return View(users);
         }
 
@@ -67,9 +82,12 @@ namespace Online_Medicine_Shopping.Controllers
             if (!String.IsNullOrEmpty(xusername) && !String.IsNullOrEmpty(xpassword) && user.Any())
             {
                 FormsAuthentication.SetAuthCookie(xusername, false);
-                SessionData(true, xusername, user.SingleOrDefault().id, user.SingleOrDefault().email, user.SingleOrDefault().type_id);
-                ViewBag.id = user.SingleOrDefault().id;
+                SessionData(true, xusername, user.FirstOrDefault().id, user.FirstOrDefault().email, user.FirstOrDefault().type_id);
+
                 Session["status"] = true;
+                Session["user_full_name"] = user.FirstOrDefault().fullname;
+                Session["phone_number"] = user.FirstOrDefault().phone;
+                Session["user_image"] = user.FirstOrDefault().image;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -110,14 +128,18 @@ namespace Online_Medicine_Shopping.Controllers
         //*********************************************************************
         public new ActionResult Profile(int id)
         {
-            
+
+            if (Session["user_id"].Equals(id))
+            {
                 var user = db.users.Where(e => e.id == id).Include(e => e.user_type).SingleOrDefault();
                 ViewBag.type = user.user_type.type_name;
                 return View(user);
-            
+            }
 
-           
-
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
         }
         //*********************************************************************
@@ -126,24 +148,67 @@ namespace Online_Medicine_Shopping.Controllers
         //*********************************************************************
         public ActionResult EditProfile(int? id)
         {
-         
+
+            if (Session["user_id"].Equals(id))
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 users users = db.users.Find(id);
                 if (users == null)
                 {
                     return HttpNotFound();
                 }
-                ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
+
+                
                 return View(users);
+            }
+
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            
+                return View(users);
+
 
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include = "id,username,password,phone,address,type_id,fullname,email")] users user)
+        public ActionResult EditProfile([Bind(Include = "id,username,password,image,phone,address,type_id,fullname,email")] users users)
         {
             if (ModelState.IsValid)
             {
+
+                //for file Posted
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images/users"), fileName);
+                        file.SaveAs(path);
+                        db.users.FirstOrDefault(e=>e.id==(int)Session["user_id"]).image
+                            .Replace(db.users.FirstOrDefault(e => e.id == (int)Session["user_id"]).image, fileName);
+                        users.type_id = 2;
+                        
+                        db.Entry(users).State = EntityState.Modified;
+                        users.image = fileName;
+                        db.SaveChanges();
+                        return RedirectToAction("Profile", new { id = users.id });
+                    }
+
+                }
+            }
+            ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
+            return View(users);
+
                 user.type_id = (int)Session["type"];
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
@@ -151,6 +216,7 @@ namespace Online_Medicine_Shopping.Controllers
             }
             ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", user.type_id);
             return RedirectToAction("Profile", new { id = user.id });
+
         }
         //*********************************************************************
         //----------Edit Profile Functionalities----------------------------
@@ -158,6 +224,14 @@ namespace Online_Medicine_Shopping.Controllers
         //*********************************************************************
               public ActionResult DeleteProfile(int? id)
         {
+
+            if (Session["user_id"].Equals(id))
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 users user = db.users.Find(id);
                 if (user == null)
                 {

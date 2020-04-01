@@ -37,106 +37,36 @@
                                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                                             <ul class="nav navbar-nav">
                                                 <a href="#"><img width="65" height="60" src="~/Content/images/logo33.png" alt="logo"></a>
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="https://localhost:44344">Home</a></li>
                                                 <li class="dropdown">
                                                     <a href="product.html">Store</a>
                                                     <div class="dropdown-menu" style="width:850px">
                                                         <div class="dropdown-menu-inner">
                                                             <div class="row">
                                                                 <div class="mega-col col-xs-12 col-sm-12 col-md-4 ">
-                                                                    <div class="mega-col-inner">
-                                                                        <div class="tv-widget">
-                                                                            <h5 class="widget-heading title">Men</h5>
-                                                                            <div class="">
-                                                                                <ul class="content">
-                                                                                    <li><a href=""><span>Fragrance</span></a></li>
-                                                                                    <li><a href=""><span>Makeup</span></a></li>
-                                                                                    <li><a href=""><span>Skin care</span></a></li>
-                                                                                    <li><a href=""><span>lystony</span></a></li>
-                                                                                    <li><a href=""><span>Bath &amp; Body</span></a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
 
-                                                                        <div class="tv-widget">
-                                                                            <h5 class="widget-heading title">Beauty</h5>
-                                                                            <div class="">
-                                                                                <ul class="content">
-                                                                                    <li><a href=""><span>Sun Care &amp; Bronzers</span></a></li>
-                                                                                    <li><a href=""><span>Accessories</span></a></li>
-                                                                                    <li><a href=""><span>Tools &amp; Accessories</span></a></li>
-                                                                                    <li><a href=""><span>Gifts &amp; Gift Sets</span></a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                                 <div class="mega-col col-xs-12 col-sm-12 col-md-4 ">
                                                                     <div class="mega-col-inner">
-                                                                        <div class="tv-widget">
-                                                                            <h5 class="widget-heading title">Women</h5>
-                                                                            <div class="">
-                                                                                <ul class="content">
-                                                                                    <li><a href=""><span>Fragrance</span></a></li>
-                                                                                    <li><a href=""><span>Makeup</span></a></li>
-                                                                                    <li><a href=""><span>Skin care</span></a></li>
-                                                                                    <li><a href=""><span>lystony</span></a></li>
-                                                                                    <li><a href=""><span>Bath &amp; Body</span></a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div>
-                                                                            <div>
-                                                                                <h5 class="widget-heading title">Make up</h5>
-                                                                                <ul class="content">
-                                                                                    <li> <a href=""><span>Fragrance</span></a></li>
-                                                                                    <li><a href=""><span>Shaving</span></a></li>
-                                                                                    <li><a href=""><span>Sun care</span></a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mega-col col-xs-12 col-sm-12 col-md-4 sidebar">
-                                                                    <div class="mega-col-inner">
-                                                                        <div class="tv-widget">
-                                                                            <h5 class="widget-heading">Sale off</h5>
-                                                                            <div class="tv-widget-product-list ">
-                                                                                <div class="tv-widget-inner list">
-                                                                                    <div class="tv-product  product-block clearfix">
-                                                                                        <div class="product-block">
-                                                                                            <div class="image">
-                                                                                                <div class="product-img img">
-                                                                                                    <a class="img" title="Mars Mule" href="single-product.html">
-                                                                                                        <img class="img-responsive" src="~/Content/images/8-92x107.jpg" alt="image">
-                                                                                                    </a>
-                                                                                                </div>
 
-                                                                                            </div>
-                                                                                            <div class="product-meta">
-                                                                                                <h6 class="name"><a href="single-product.html">Mars Mule</a></h6>
-                                                                                                <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type a...</p>
-
-                                                                                                <div class="price">
-                                                                                                    <span class="price-new">$1,202.00</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">(0)</span>Total Bill</a></li>
-                                                <li><a href="cart.html">Shopping Cart</a></li>
+                                                <li><a href="#">Shopping Cart</a></li>
                                                 <li>  @Html.ActionLink("Register", "Register", "users")</li>
-                                                <li>   @Html.ActionLink("Login", "Login", "users")</li>
+                                                @if (Session["status"] != null)
+                                                {
+                                                    <img src="~/Content/images/users/@Session["user_image"]" width="30px" height="30px" style="border-radius:20px;margin-left:10px" />
+                                                    <span style="color:white">@Html.ActionLink((string)Session["user_name"], "Profile", "users", new { id = Session["user_id"] }, null) </span>
+                                                }
+                                                else
+                                                { <li>@Html.ActionLink("Login", "Login", "users")</li>}
                                             </ul>
 
                                         </div>
@@ -150,7 +80,7 @@
                                         <ul>
                                             @if (Session["status"] != null)
                                             {
-                                            <li> @Html.ActionLink("My Profile", "Profile", "users", new { id = Session["user_id"] }, null) <span style="color:white"> | </span> @Html.ActionLink("Logout", "LogOut", "users")</li>
+                                            <li> <span> @Html.ActionLink("Logout", "LogOut", "users")</span></li>
                                             }
                                         </ul>
                                     </div>

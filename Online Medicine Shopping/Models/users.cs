@@ -24,7 +24,9 @@ namespace Online_Medicine_Shopping.Models
         [Required]
         [Display(Name = "Address")]
         public string address { get; set; }
-
+                [Required]
+        [Display(Name = "Image")]
+        public string image { get; set; }
 
         [ForeignKey(nameof(type_id))]
         [Display(Name = "Role Name")]
