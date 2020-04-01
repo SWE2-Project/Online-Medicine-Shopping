@@ -146,20 +146,22 @@ namespace Online_Medicine_Shopping.Controllers
         //----------Edit Profile Functionalities----------------------------
         //This Module is assigned to Ahmed Abdel Fatah
         //*********************************************************************
-
         public ActionResult EditProfile(int? id)
         {
+
             if (Session["user_id"].Equals(id))
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+
                 users users = db.users.Find(id);
                 if (users == null)
                 {
                     return HttpNotFound();
                 }
+
                 
                 return View(users);
             }
@@ -168,6 +170,10 @@ namespace Online_Medicine_Shopping.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            
+                return View(users);
+
 
         }
 
@@ -178,6 +184,7 @@ namespace Online_Medicine_Shopping.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 //for file Posted
                 if (Request.Files.Count > 0)
                 {
@@ -201,31 +208,37 @@ namespace Online_Medicine_Shopping.Controllers
             }
             ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
             return View(users);
+
+                user.type_id = (int)Session["type"];
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+              
+            }
+            ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", user.type_id);
+            return RedirectToAction("Profile", new { id = user.id });
+
         }
         //*********************************************************************
         //----------Edit Profile Functionalities----------------------------
         //This Module is assigned to Ahmed Shokry
         //*********************************************************************
-        public ActionResult DeleteProfile(int? id)
+              public ActionResult DeleteProfile(int? id)
         {
+
             if (Session["user_id"].Equals(id))
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+
                 users user = db.users.Find(id);
                 if (user == null)
                 {
                     return HttpNotFound();
                 }
                 return View(user);
-            }
 
-            else
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
         }
 
         // POST: users/Delete/5
@@ -238,7 +251,6 @@ namespace Online_Medicine_Shopping.Controllers
             db.SaveChanges();
             return RedirectToAction("Register");
         }
-
 
 
 
