@@ -23,6 +23,7 @@ namespace Online_Medicine_Shopping.Migrations
               new Models.user_type { type_id = 1, type_name = "admin" },
               new Models.user_type { type_id = 2, type_name = "customer" }
             );
+            context.SaveChanges();
             context.users.AddOrUpdate(
                 e => e.id,
                 new Models.users {  username = "DonnaHall123", password = "Donna123456789", phone = "012222222", address = "test", type_id = 1, fullname = "Donna Hall", email = "Donna@gmail.com" ,image="admin.png"},
@@ -30,6 +31,7 @@ namespace Online_Medicine_Shopping.Migrations
                 new Models.users {  username = "PeterAdam555", password = "peter123456789", phone = "012222222", address = "test", type_id = 2, fullname = "Peter Adam", email = "peter@gmail.com", image = "customer.png" }
 
                 );
+                context.SaveChanges();
         }
     }
 }
