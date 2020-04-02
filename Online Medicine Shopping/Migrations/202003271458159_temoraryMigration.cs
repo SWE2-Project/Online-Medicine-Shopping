@@ -28,10 +28,8 @@ namespace Online_Medicine_Shopping.Migrations
                         type_id = c.Int(nullable: false),
                         fullname = c.String(nullable: false, maxLength: 20),
                         email = c.String(nullable: false),
-                    image = c.String(nullable: false)
-                  image = c.String(nullable: false)
-                    })
-                       image = c.String(nullable: false)
+                        image = c.String(nullable: false)
+
                 })
 
 
