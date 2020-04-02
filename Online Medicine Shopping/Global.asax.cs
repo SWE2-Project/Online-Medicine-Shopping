@@ -20,9 +20,6 @@ namespace Online_Medicine_Shopping
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Configuration configuration = new Configuration();
-            DbMigrator migrator = new DbMigrator(configuration);
-            Database.SetInitializer<DbContext>(null);
             Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(null);
         }
     }
