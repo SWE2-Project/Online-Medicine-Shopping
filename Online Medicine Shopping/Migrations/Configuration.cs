@@ -9,7 +9,7 @@ namespace Online_Medicine_Shopping.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Online_Medicine_Shopping.DBContext.TemporaryDBContext context)
