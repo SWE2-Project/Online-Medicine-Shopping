@@ -48,7 +48,8 @@ namespace Online_Medicine_Shopping.Controllers
                         db.users.Add(users);
                         db.SaveChanges();
                         Session["status"] = true;
-                        Session["type_id"] = users.id;
+                        Session["user_image"] = users.image;
+                        Session["user_name"] = users.username;
                         Session["user_id"] = users.id;
                         return RedirectToAction("Profile", new { id = users.id });
 
@@ -260,6 +261,7 @@ namespace Online_Medicine_Shopping.Controllers
             }
             else { return HttpNotFound(); }
         }
+        
 
         }  
 
@@ -267,4 +269,4 @@ namespace Online_Medicine_Shopping.Controllers
 
     }
 
-}
+
