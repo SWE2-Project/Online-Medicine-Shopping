@@ -20,7 +20,7 @@ namespace Online_Medicine_Shopping
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-           Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(new CreateDatabaseIfNotExists<TemporaryDBContext>());
+           Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(null);
         }
     }
 }
