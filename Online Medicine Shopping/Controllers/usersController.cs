@@ -183,6 +183,7 @@ namespace Online_Medicine_Shopping.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile([Bind(Include = "id,username,password,image,phone,address,type_id,fullname,email")] users users)
         {
+            var account = db.users.SingleOrDefault(e => e.id == users.id);
             if (ModelState.IsValid)
             {
                 //for file Posted
@@ -194,23 +195,48 @@ namespace Online_Medicine_Shopping.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/images/users"), fileName);
                         file.SaveAs(path);
-                        var account = db.users.SingleOrDefault(e=>e.id==users.id);
+
                         account.image = fileName;
                         account.username = users.username;
                         account.password = users.password;
                         account.phone = users.phone;
                         account.address = users.address;
-                        
+                        Session["user_image"] = fileName;
                         account.fullname = users.fullname;
                         account.email = users.email;
+                        db.Entry(account).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Profile", new { id = users.id });
                     }
 
                 }
+                else
+                {
+                    account.image = users.image;
+                    account.username = users.username;
+                    account.password = users.password;
+                    account.phone = users.phone;
+                    account.address = users.address;
+                    Session["user_image"] = users.image;
+                    account.fullname = users.fullname;
+                    account.email = users.email;
+                    db.Entry(account).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Profile", new { id = users.id });
+                }
             }
-            ViewBag.type_id = new SelectList(db.user_type, "type_id", "type_name", users.type_id);
-            return View(users);
+          
+            account.image = (string)Session["user_image"];
+            account.username = users.username;
+            account.password = users.password;
+            account.phone = users.phone;
+            account.address = users.address;
+            Session["user_image"] = account.image;
+            account.fullname = users.fullname;
+            account.email = users.email;
+            db.Entry(account).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Profile", new { id = users.id });
         }
         //*********************************************************************
         //----------Edit Profile Functionalities----------------------------
