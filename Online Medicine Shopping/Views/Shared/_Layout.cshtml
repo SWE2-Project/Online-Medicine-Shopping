@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
-
+@using Online_Medicine_Shopping.DBContext;
+@using Online_Medicine_Shopping.Models;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,21 +42,40 @@
                                                 <li class="dropdown">
                                                     <a href="product.html">Store</a>
                                                     <div class="dropdown-menu" style="width:850px">
-                                                        <div class="dropdown-menu-inner">
+                                                        <iv class="dropdown-menu-inner">
                                                             <div class="row">
                                                                 <div class="mega-col col-xs-12 col-sm-12 col-md-4 ">
 
-                                                                </div>
-                                                                <div class="mega-col col-xs-12 col-sm-12 col-md-4 ">
                                                                     <div class="mega-col-inner">
+                                                                        <div class="tv-widget">
+                                                                            <div class="">
+                                                                                <ul class="content">
+
+
+
+                                                                                    @foreach (var i in (IEnumerable<category>)Session["category"])
+                                                                                    {
+
+                                                                                        <li><a href="https://localhost:44344/products/SearchResult?medicine_name=@i.name">@i.name</li>
+                                                                                    }
+
+
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
 
 
                                                                     </div>
-                                                                </div>
+                                                                    <div class="mega-col col-xs-12 col-sm-12 col-md-4 ">
+                                                                        <div class="mega-col-inner">
 
+
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
                                                 </li>
                                                 <li><a href="#" id="wishlist-total" title="Wish List (0)"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">(0)</span>Total Bill</a></li>
                                                 <li><a href="#">Shopping Cart</a></li>
@@ -66,7 +86,9 @@
                                                     <span style="color:white">@Html.ActionLink((string)Session["user_name"], "Profile", "users", new { id = Session["user_id"] }, null) </span>
                                                 }
                                                 else
-                                                { <li>@Html.ActionLink("Login", "Login", "users")</li>}
+                                                {
+                                                    <li>@Html.ActionLink("Login", "Login", "users")</li>
+}
                                             </ul>
 
                                         </div>
@@ -80,7 +102,7 @@
                                         <ul>
                                             @if (Session["status"] != null)
                                             {
-                                            <li> <span> @Html.ActionLink("Logout", "LogOut", "users")</span></li>
+                                                <li> <span> @Html.ActionLink("Logout", "LogOut", "users")</span></li>
                                             }
                                         </ul>
                                     </div>

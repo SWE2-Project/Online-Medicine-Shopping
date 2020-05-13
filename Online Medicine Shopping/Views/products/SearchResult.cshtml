@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Online_Medicine_Shopping.Models.product>
+
+@{
+    ViewBag.Title = "Search Result";
+}
+<div class="tv-newletter" style=" border-top:none;margin-top: auto;padding-top: initial;">
+    <div class="container">
+        <div class="tv-newleter-content-box">
+            <div id="frm_subscribe-normal">
+                <form name="subscribe" id="tv-subscribe" action="~/products/SearchResult">
+                    <input name="medicine_name" id="subscribe_email" placeholder="Medicine , Category , Supplier....." type="text" required>
+                    <input type="submit" class="btn" value="Search">
+                </form>
+            </div><!-- /#frm_subscribe -->
+        </div><!-- /.box-content -->
+
+    </div>
+    <hr />
+</div>
+
+@if (Model.Any())
+{
+
+
+    foreach (var item in Model)
+    {
+        <div class="product-layout grid-style product-list product-col col-sm-12">
+            <div class="product-thumb transition">
+                <div class="item">
+                    <div class="item-inner">
+                        <div class="image images-container">
+
+                            <img src="~/Content/images/@item.image" width="250px" height="300px" class="img-responsive">
+
+                            <div class="button-group tv-action-btn">
+
+                                <button type="button" class="addToCart btn-button" title="Add to cart">
+                                    <i class="fa fa-shopping-basket"></i>
+                                    <span>@Html.ActionLink("Add To Cart", "Add", "Cart", new { product_id = item.id }, null) </span>
+                                </button>
+                            </div><!-- image -->
+                        </div>
+                        <div class="caption">
+                            <h4 class="product-name"><a href="#">@item.name</a></h4>
+                            <label>Category:</label><p class="description">@item.category.name</p>
+                            <label>Description:</label><p class="description">@item.descrition</p>
+                            <label>Manufacturer:</label><p class="description">@item.Supplier.name</p>
+                            <div class="price-box">
+                                <label>Price:</label><p class="special-price"><span class="price">$@item.price</span></p>
+                            </div>
+                        </div> <!-- caption -->
+
+                    </div>
+                </div><!-- product-thumb -->
+            </div><!-- product-layout -->
+        </div>
+
+
+    }
+
+}
+else
+{
+    <div style="font-weight:bolder;color:darkred;text-align:center;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin-top:20px">No Results Matchs</div>
+}
+
+
+
+
+
+
+
+
+
+

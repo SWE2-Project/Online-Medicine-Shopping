@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\productsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="DBContext\TemporaryDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,6 +138,9 @@
       <DependentUpon>202003271458159_temoraryMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\category.cs" />
+    <Compile Include="Models\product.cs" />
+    <Compile Include="Models\supplier.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Models\user_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -246,6 +250,8 @@
     <Content Include="Views\users\EditProfile.cshtml" />
     <Content Include="Views\users\DeleteProfile.cshtml" />
     <Content Include="Views\users\list_of_users.cshtml" />
+    <Content Include="Views\products\Create.cshtml" />
+    <Content Include="Views\products\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

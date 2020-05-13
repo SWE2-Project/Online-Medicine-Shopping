@@ -15,5 +15,11 @@ namespace Online_Medicine_Shopping.DBContext
         public DbSet<user_type> user_type { get; set; }
 
         public DbSet<users> users { get; set; }
+
+        public DbSet<product> product { get; set; }
+        public DbSet<supplier> suppliers { get; set; }
+
+        public DbSet<category> categories { get; set; }
+
     }
 }
