@@ -1,47 +1,141 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@model IEnumerable<Online_Medicine_Shopping.Models.product>
 
-    <body id="myPage">
-        <div class="tv-newletter" style=" border-top:none;margin-top: auto;padding-top: initial;">
+<!--Template Name: FerryStyle
+File Name: index.html
+Author Name: ThemeVault
+Author URI: http://www.themevault.net/
+License URI: http://www.themevault.net/license/-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            padding: 20px;
+        }
+
+        .grid-item {
+            border-color: #635f5f;
+            border-radius: 5px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body id="myPage">
+    <div class="tv-newletter" style=" border-top:none;margin-top: auto;padding-top initial;">
+        <div class="container">
+            <div class="tv-newleter-content-box">
+                <div id="frm_subscribe-normal">
+                    <form name="subscribe" id="tv-subscribe" action="~/products/SearchResult">
+                        <input name="medicine_name" id="subscribe_email" placeholder="Enter Medicine Name here..." type="text">
+                        <input type="submit" class="btn" value="Search">
+                    </form>
+                </div><!-- /#frm_subscribe -->
+            </div><!-- /.box-content -->
+        </div>
+    </div>
+    <div class="mypage">
+        <div class="tv-module-title">
+            <h2>Featured products</h2>
+        </div>
+        <div class="grid-container">
+
+            @foreach (var item in Model)
+            {
+
+                <div class="grid-item">
+                    <div class="row_items ">
+                        <div class="product-layout grid-style ">
+                            <div class="product-thumb transition">
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="image images-container" style="height:450px;">
+                                            <img src="~/Content/images/@item.image" class="img-responsive">
+                                            <div class="button-group tv-action-btn">
+                                                <button type="button" class="addToCart btn-button">
+                                                    <i class="fa fa-shopping-basket"></i>
+                                                    <span>@Html.ActionLink("Add To Cart", "Add", "Cart",new {product_id=item.id},null) </span>
+                                                </button>
+                                                <button type="button" class="btn-compare btn-button"><i class="fa fa-refresh"></i><span> @Html.ActionLink("Compare With Another", "SearchResult", "products", new { medicine_name = item.category.name, @class = "product-image" }, null)</span>
+                                            </div><!-- image -->
+                                        </div>
+                                        <div class="caption">
+                                            <h4 class="product-name" style="margin-left:8px;">@Html.ActionLink(item.name, "SearchResult", "products", new { medicine_name = item.name, @class = "product-image" }, null)</h4>
+                                            <div class="price-box">
+                                                <label>Price:</label>
+                                                <p class="special-price"><span class="price" style="margin-left:8px;">$@item.price</span></p>
+                                            </div>
+                                        </div> <!-- caption -->
+
+                                    </div>
+                                </div><!-- product-thumb -->
+                            </div><!-- product-layout -->
+                        </div>
+                    </div>
+                </div><!--container-->
+            }
+
+
+        </div>
+
+        <div class="tv-module-title">
+            <h2>Best Selling</h2>
+        </div>
+        <div class="tv-offerblock1 tv-offspace-90">
             <div class="container">
-                <div class="tv-newleter-content-box">
-                    <div id="frm_subscribe-normal">
-                        <form name="subscribe" id="tv-subscribe" action="~/products/SearchResult">
-                            <input name="medicine_name" id="subscribe_email" placeholder="Enter Medicine Name here..." type="text">
-                            <input type="submit" class="btn" value="Search">
-                        </form>
-                    </div><!-- /#frm_subscribe -->
-                </div><!-- /.box-content -->
+                <div class="tv-container-inner">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+                            <div class="col-inner">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-inner">
+                                            <div class="tv-pannel-default">
+                                                <div class="tv-image-item tv-effect-01">
+                                                    <a href="https://localhost:44397/products/SearchResult?medicine_name=Walgreens%20Mucus%20Relief%20Chest%20Congestion%20Immediate-Release%20Tablets&class=product-image"><img src="~/Content/images/wal.jpg" width="1000px" class="img-responsive" alt="image"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+                            <div class="col-inner">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-inner">
+                                            <div class="tv-pannel-default">
+                                                <div class="tv-image-item tv-effect-01">
+                                                    <a href="https://localhost:44397/products/SearchResult?medicine_name=Congestal%20tablet&class=product-image"><img src="~/Content/images/congestalcaps.png" class="img-responsive" alt="image"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-inner">
+                                            <div class="tv-pannel-default">
+                                                <div class="tv-image-item tv-effect-01">
+                                                    <a href="https://localhost:44397/products/SearchResult?medicine_name=Dermarest%20Eczema%20Medicated%20Lotion%20Fragrance%20Free&class=product-image"><img src="~/Content/images/walfour.jpg" class="img-responsive" alt="image"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <br />
-        <div class="jumbotron">
-            <h1>ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Getting started</h2>
-                <p>
-                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                    enables a clean separation of concerns and gives you full control over markup
-                    for enjoyable, agile development.
-                </p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Get more libraries</h2>
-                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Web Hosting</h2>
-                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-            </div>
-        </div>
-        
-        </body>
+</body>
+</html>
+

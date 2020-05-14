@@ -252,6 +252,9 @@
     <Content Include="Views\users\list_of_users.cshtml" />
     <Content Include="Views\products\Create.cshtml" />
     <Content Include="Views\products\SearchResult.cshtml" />
+    <Content Include="Views\products\Index.cshtml" />
+    <Content Include="Views\products\Edit.cshtml" />
+    <Content Include="Views\products\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

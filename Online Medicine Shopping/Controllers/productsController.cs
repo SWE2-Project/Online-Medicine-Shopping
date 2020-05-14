@@ -36,7 +36,7 @@ namespace Online_Medicine_Shopping.Controllers
 
 
         }
-
+         
 
         // GET: products/Create
         public ActionResult Create()
@@ -80,8 +80,89 @@ namespace Online_Medicine_Shopping.Controllers
             ViewBag.supplier_id = new SelectList(db.suppliers, "id", "name", product.supplier_id);
             return View(product);
         }
+        public ActionResult Index()
+        {
+            if ((int)Session["type_id"] == 1)
+            {
+                var product = db.product.Include(p => p.category);
+                return View(product.ToList());
+            }
+            else { return HttpNotFound(); }
+        }
+        // GET: products/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if ((int)Session["type_id"] == 1)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                product product = db.product.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.category_id = new SelectList(db.categories, "id", "name", product.category_id);
+                return View(product);
+            }
+            else { return HttpNotFound(); }
+        }
 
-      
+        // POST: products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,price,quantity,category_id,descrition,image")] product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.category_id = new SelectList(db.categories, "id", "name", product.category_id);
+            return View(product);
+        }
+
+        // GET: products/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if ((int)Session["type_id"] == 1)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                product product = db.product.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+            }
+            else { return HttpNotFound(); }
+        }
+
+        // POST: products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            product product = db.product.Find(id);
+            db.product.Remove(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
     }
 }
