@@ -21,6 +21,7 @@ namespace Online_Medicine_Shopping
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
            Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(null);
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<Online_Medicine_Shopping.DBContext.TemporaryDBContext, Online_Medicine_Shopping.Migrations.Configuration>("DefaultConnection"));
         }
     }
 }

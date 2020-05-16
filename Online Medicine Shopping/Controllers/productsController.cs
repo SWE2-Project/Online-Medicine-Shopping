@@ -89,6 +89,24 @@ namespace Online_Medicine_Shopping.Controllers
             }
             else { return HttpNotFound(); }
         }
+        // GET: products/Details/5
+        public ActionResult Details(int? id)
+        {
+            if ((int)Session["type_id"] == 1)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                product product = db.product.Find(id);
+                if (product == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(product);
+            }
+            else { return HttpNotFound(); }
+        }
         // GET: products/Edit/5
         public ActionResult Edit(int? id)
         {
