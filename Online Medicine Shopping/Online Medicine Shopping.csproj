@@ -129,6 +129,7 @@
     <Compile Include="Controllers\categoriesControllerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\productsController.cs" />
+    <Compile Include="Controllers\suppliersControllerController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="DBContext\TemporaryDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,6 +260,11 @@
     <Content Include="Views\products\Details.cshtml" />
     <Content Include="Views\categoriesController\Create.cshtml" />
     <Content Include="Views\categoriesController\Edit.cshtml" />
+    <Content Include="Views\categoriesController\Delete.cshtml" />
+    <Content Include="Views\categoriesController\Index.cshtml" />
+    <Content Include="Views\categoriesController\Details.cshtml" />
+    <Content Include="Views\suppliers.cshtml" />
+    <Content Include="Views\suppliersController\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,7 @@ using Online_Medicine_Shopping.Models;
 
 namespace Online_Medicine_Shopping.Controllers
 {
-    public class categoriesControllerController : Controller
+    public class categoriesController : Controller
     {
         private OMSDBContext db = new OMSDBContext();
 
@@ -19,6 +19,21 @@ namespace Online_Medicine_Shopping.Controllers
         public ActionResult Index()
         {
             return View(db.categories.ToList());
+        }
+
+        // GET: categories/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            category category = db.categories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
         }
 
         // GET: categories/Create
@@ -73,6 +88,41 @@ namespace Online_Medicine_Shopping.Controllers
                 return RedirectToAction("Index");
             }
             return View(category);
+        }
+
+        // GET: categories/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            category category = db.categories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
+        }
+
+        // POST: categories/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            category category = db.categories.Find(id);
+            db.categories.Remove(category);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
