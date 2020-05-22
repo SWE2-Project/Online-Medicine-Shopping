@@ -265,6 +265,10 @@
     <Content Include="Views\categoriesController\Details.cshtml" />
     <Content Include="Views\suppliers.cshtml" />
     <Content Include="Views\suppliersController\Create.cshtml" />
+    <Content Include="Views\suppliersController\Delete.cshtml" />
+    <Content Include="Views\suppliersController\Details.cshtml" />
+    <Content Include="Views\suppliersController\Edit.cshtml" />
+    <Content Include="Views\suppliersController\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
