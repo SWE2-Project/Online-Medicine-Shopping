@@ -23,5 +23,12 @@ namespace Online_Medicine_Shopping
            Database.SetInitializer<Online_Medicine_Shopping.DBContext.TemporaryDBContext>(null);
             // Database.SetInitializer(new MigrateDatabaseToLatestVersion<Online_Medicine_Shopping.DBContext.TemporaryDBContext, Online_Medicine_Shopping.Migrations.Configuration>("DefaultConnection"));
         }
+        void Session_Start(object sender, EventArgs e)
+        {
+            // Code that runs when a new session is started
+
+            Response.Redirect("~/Home/Index");
+
+        }
     }
 }

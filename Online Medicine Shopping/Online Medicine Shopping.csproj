@@ -126,10 +126,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\categoriesControllerController.cs" />
+    <Compile Include="Controllers\categoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\productsController.cs" />
-    <Compile Include="Controllers\suppliersControllerController.cs" />
+    <Compile Include="Controllers\suppliersController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="DBContext\TemporaryDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,17 +258,17 @@
     <Content Include="Views\products\Edit.cshtml" />
     <Content Include="Views\products\Delete.cshtml" />
     <Content Include="Views\products\Details.cshtml" />
-    <Content Include="Views\categoriesController\Create.cshtml" />
-    <Content Include="Views\categoriesController\Edit.cshtml" />
-    <Content Include="Views\categoriesController\Delete.cshtml" />
-    <Content Include="Views\categoriesController\Index.cshtml" />
-    <Content Include="Views\categoriesController\Details.cshtml" />
+    <Content Include="Views\categories\Create.cshtml" />
+    <Content Include="Views\categories\Edit.cshtml" />
+    <Content Include="Views\categories\Delete.cshtml" />
+    <Content Include="Views\categories\Index.cshtml" />
+    <Content Include="Views\categories\Details.cshtml" />
     <Content Include="Views\suppliers.cshtml" />
-    <Content Include="Views\suppliersController\Create.cshtml" />
-    <Content Include="Views\suppliersController\Delete.cshtml" />
-    <Content Include="Views\suppliersController\Details.cshtml" />
-    <Content Include="Views\suppliersController\Edit.cshtml" />
-    <Content Include="Views\suppliersController\Index.cshtml" />
+    <Content Include="Views\suppliers\Create.cshtml" />
+    <Content Include="Views\suppliers\Delete.cshtml" />
+    <Content Include="Views\suppliers\Details.cshtml" />
+    <Content Include="Views\suppliers\Edit.cshtml" />
+    <Content Include="Views\suppliers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

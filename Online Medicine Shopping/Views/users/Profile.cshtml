@@ -109,12 +109,18 @@
             </dd>
 
         </div>
-         </dl>
-        <button class="btn btn-primary">@Html.ActionLink("Edit Profile", "EditProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
-        <button class="btn btn-primary">@Html.ActionLink("Delete Profile", "DeleteProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
-       
-        @if(Model.type_id==1) {<button class="btn btn-primary">@Html.ActionLink("Show All Users", "list_of_users")</button> }
-    
+    </dl>
+    <button class="btn btn-primary">@Html.ActionLink("Edit Profile", "EditProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
+    <button class="btn btn-primary">@Html.ActionLink("Delete Profile", "DeleteProfile", new { id = @Html.DisplayFor(model => model.id) })</button>
+
+    @if (Model.type_id == 1)
+    {
+        <button class="btn btn-primary">@Html.ActionLink("Show All Users", "list_of_users")</button>
+        <button class="btn btn-primary">@Html.ActionLink("Products", "Index", "products")</button>
+        <button class="btn btn-primary">@Html.ActionLink("Categories", "Index", "categories")</button>
+        <button class="btn btn-primary">@Html.ActionLink("Suppliers", "Index", "suppliers")</button>
+    }
+
 </div>
 </div>
 

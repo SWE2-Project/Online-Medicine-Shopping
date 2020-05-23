@@ -122,6 +122,8 @@ namespace Online_Medicine_Shopping.Controllers
                     return HttpNotFound();
                 }
                 ViewBag.category_id = new SelectList(db.categories, "id", "name", product.category_id);
+                ViewBag.supplier_id = new SelectList(db.suppliers, "id", "name", product.supplier_id);
+                Session["product_image"] = product.image;
                 return View(product);
             }
             else { return HttpNotFound(); }
@@ -132,16 +134,42 @@ namespace Online_Medicine_Shopping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,price,quantity,category_id,descrition,image")] product product)
+        public ActionResult Edit([Bind(Include = "id,name,price,quantity,category_id,supplier_id,descrition,image")] product product)
         {
             if (ModelState.IsValid)
             {
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images/users"), fileName);
+                        file.SaveAs(path);
+
+                        product.image = fileName;
+
+                        db.Entry(product).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+
+                        product.image = (string)Session["product_image"];
+                        db.Entry(product).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                product.image = (string)Session["product_image"];
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.category_id = new SelectList(db.categories, "id", "name", product.category_id);
             return View(product);
+         
         }
 
         // GET: products/Delete/5

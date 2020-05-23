@@ -11,107 +11,107 @@ using Online_Medicine_Shopping.Models;
 
 namespace Online_Medicine_Shopping.Controllers
 {
-    public class suppliersController : Controller
+    public class categoriesController : Controller
     {
-        private OMSDBContext db = new OMSDBContext();
+        private TemporaryDBContext db = new TemporaryDBContext();
 
-        // GET: suppliers
+        // GET: categories
         public ActionResult Index()
         {
-            return View(db.suppliers.ToList());
+            return View(db.categories.ToList());
         }
 
-        // GET: suppliers/Details/5
+        // GET: categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
-            if (supplier == null)
+            category category = db.categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(supplier);
+            return View(category);
         }
 
-        // GET: suppliers/Create
+        // GET: categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: suppliers/Create
+        // POST: categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,location,email")] supplier supplier)
+        public ActionResult Create([Bind(Include = "id,name")] category category)
         {
             if (ModelState.IsValid)
             {
-                db.suppliers.Add(supplier);
+                db.categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(supplier);
+            return View(category);
         }
 
-        // GET: suppliers/Edit/5
+        // GET: categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
-            if (supplier == null)
+            category category = db.categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(supplier);
+            return View(category);
         }
 
-        // POST: suppliers/Edit/5
+        // POST: categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,location,email")] supplier supplier)
+        public ActionResult Edit([Bind(Include = "id,name")] category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(supplier).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(supplier);
+            return View(category);
         }
 
-        // GET: suppliers/Delete/5
+        // GET: categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            supplier supplier = db.suppliers.Find(id);
-            if (supplier == null)
+            category category = db.categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(supplier);
+            return View(category);
         }
 
-        // POST: suppliers/Delete/5
+        // POST: categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            supplier supplier = db.suppliers.Find(id);
-            db.suppliers.Remove(supplier);
+            category category = db.categories.Find(id);
+            db.categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
